@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>LinkedIn Job Collector</title>
+  <style>
+    body {
+      width: 300px;
+      margin: 0;
+      padding: 14px;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      font-size: 13px;
+      color: #1f1f1f;
+      background: #f7f8fa;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 15px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #d9dde3;
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    .stat {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .status {
+      min-height: 32px;
+      color: #5f6b7a;
+      margin-top: 10px;
+    }
+
+    .status.success {
+      color: #0f6a37;
+    }
+
+    .status.error {
+      color: #a12727;
+    }
+
+    .status.warning {
+      color: #b45309;
+    }
+
+    .file-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .file-actions button {
+      width: 100%;
+      border: 1px solid #d9dde3;
+      border-radius: 8px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font: inherit;
+      background: #fff;
+      color: #1f1f1f;
+    }
+
+    .file-actions button:hover {
+      background: #f0f2f5;
+    }
+
+    .connection {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      font-size: 12px;
+      color: #5f6b7a;
+    }
+
+    .connection .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #9ca3af;
+      flex-shrink: 0;
+    }
+
+    .connection .dot.connected {
+      background: #16a34a;
+    }
+
+    .connection .dot.warning {
+      background: #d97706;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .actions button {
+      flex: 1;
+      border: 0;
+      border-radius: 8px;
+      padding: 10px 12px;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    #export {
+      background: #0a66c2;
+      color: #fff;
+    }
+
+    #clear {
+      background: #e8edf3;
+      color: #223041;
+    }
+  </style>
+</head>
+<body>
+  <h1>LinkedIn Job Collector</h1>
+  <div class="card">
+    <div class="stat">
+      <span>Saved jobs</span>
+      <strong id="count">0</strong>
+    </div>
+
+    <div class="file-actions">
+      <button id="create-template">Create Template</button>
+      <button id="upload-sheet">Upload Sheet</button>
+    </div>
+
+    <div class="connection" id="connection">
+      <span class="dot" id="connection-dot"></span>
+      <span id="connection-text">No file connected</span>
+    </div>
+
+    <div class="actions">
+      <button id="export">Export XLSX</button>
+      <button id="clear">Clear All</button>
+    </div>
+
+    <div class="status" id="status">Waiting for LinkedIn jobs page...</div>
+  </div>
+  <script src="../lib/xlsx.full.min.js"></script>
+  <script src="schema.js"></script>
+  <script src="store.js"></script>
+  <script src="export.js"></script>
+  <script src="import.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
