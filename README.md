@@ -1,131 +1,91 @@
-# LinkedIn Job Collector
+# LinkedIn Job Scraper Extension
 
-A Chrome extension that automatically saves LinkedIn job listings as you browse and exports them to Excel.
+A Chrome extension that automatically collects LinkedIn job listings as you browse and exports them to Excel. All data stays on your machine -- nothing is sent to any server.
 
----
+## Features
+
+- Automatically captures job details when you click on a listing
+- Exports to `.xlsx` with one click
+- Persistent file connection with auto-save
+- Import/export to pick up where you left off
+- Works entirely offline -- no accounts, no API keys, no tracking
 
 ## Installation
 
-### Step 1: Download
+1. Download or clone this repository
+2. Open Chrome and go to `chrome://extensions`
+3. Enable **Developer mode** (toggle in the top-right)
+4. Click **Load unpacked** and select the project folder
+5. Pin the extension for easy access (puzzle piece icon > pin)
 
-1. Go to the download link you were given
-2. Click the green **"Code"** button
-3. Click **"Download ZIP"**
-4. A file called `linkedin-job-collector-standalone-master.zip` will download to your computer
+> Do not delete the extension folder after loading -- Chrome needs it to stay on disk.
 
-### Step 2: Unzip the folder
+## Usage
 
-1. Find the downloaded ZIP file (usually in your **Downloads** folder)
-2. **Right-click** the ZIP file
-3. Click **"Extract All..."**
-4. Click **"Extract"**
-5. You should now have a folder called `linkedin-job-collector-standalone-master`
-6. **Remember where this folder is** — do not delete it. Chrome needs it to stay on your computer for the extension to work.
-
-### Step 3: Install in Chrome
-
-1. Open Google Chrome
-2. In the address bar, type `chrome://extensions` and press Enter
-3. In the top-right corner, flip the **"Developer mode"** toggle ON (it will turn blue)
-4. Click the **"Load unpacked"** button that appears in the top-left
-5. Navigate to the `linkedin-job-collector-standalone-master` folder you unzipped
-6. Select the folder and click **"Select Folder"**
-7. The extension should now appear in your extensions list with a puzzle piece icon
-
-### Step 4: Pin the extension (recommended)
-
-1. Click the **puzzle piece icon** in the top-right of Chrome (next to the address bar)
-2. Find **"LinkedIn Job Collector Standalone"** in the list
-3. Click the **pin icon** next to it
-4. The extension icon will now always be visible in your toolbar
-
----
-
-## How to Use
-
-### Collecting jobs
+### Collecting Jobs
 
 1. Go to [linkedin.com/jobs](https://www.linkedin.com/jobs/) and search for jobs
 2. Click on any job listing to view its details
-3. The extension **automatically saves** the job in the background — no clicking needed
-4. Click the extension icon to see how many jobs you've saved
+3. The extension automatically saves the job -- no extra clicks needed
+4. Click the extension icon to see your saved count
 
-### Saving to a file (recommended method)
-
-1. Click the extension icon to open the popup
-2. Click **"Create Template"**
-3. Choose where to save your file (e.g., Desktop) and give it a name like `my-jobs.xlsx`
-4. **Keep the popup open** while you browse jobs — the file will update automatically as you collect
-5. When you're done, open the file in Excel to see all your jobs
-
-### Picking up where you left off
-
-If you close the popup or restart Chrome:
+### Saving to a File
 
 1. Click the extension icon
-2. Click **"Upload Sheet"**
-3. Select the same `.xlsx` file you saved before
-4. Your previous jobs are loaded back in, and auto-save reconnects to that file
-5. Any edits you made in Excel (like adding notes) will be kept
+2. Click **Create Template** to create a new `.xlsx` file, or **Upload Sheet** to reconnect an existing one
+3. Keep the popup open while browsing -- the file auto-saves as you collect
+4. Open the file in Excel to review, add notes, or mark applications
 
-### Quick export (alternative)
+### Quick Export
 
-If you just want a one-time download without auto-save:
+Click **Export XLSX** for a one-time download without setting up auto-save.
 
-1. Click the extension icon
-2. Click **"Export XLSX"**
-3. A file will download to your Downloads folder
+### Clearing Data
 
-### Clearing saved jobs
+Click **Clear All** to remove all saved jobs from the extension. Previously exported files are not affected.
 
-1. Click the extension icon
-2. Click **"Clear All"**
-3. All saved jobs are removed from the extension (your exported files are not affected)
+## Data Collected
 
----
+Each job listing captures the following fields:
 
-## What gets saved
+| Field | Description |
+|-------|-------------|
+| `linkedin_job_id` | LinkedIn's internal job ID |
+| `company` | Company name |
+| `title` | Job title |
+| `location` | Job location |
+| `remote` | Remote, Hybrid, or On-site |
+| `job_type` | Full-time, Internship, Contract, etc. |
+| `salary_range` | Salary if listed |
+| `description` | First 200 words of the job description |
+| `date_saved` | Date you collected the job |
+| `date_applied` | Empty -- fill in yourself |
+| `deadline` | Application deadline if listed |
+| `url` | External application link |
+| `linkedin_link` | Direct link to the job on LinkedIn |
+| `notes` | Empty -- add your own notes |
 
-Each job listing saves these fields:
+## Privacy
 
-| Column | Description |
-|--------|-------------|
-| linkedin_job_id | LinkedIn's internal job ID |
-| company | Company name |
-| title | Job title |
-| location | Job location |
-| remote | Remote, Hybrid, or On-site |
-| job_type | Full-time, Internship, Contract, etc. |
-| salary_range | Salary if listed |
-| description | First 200 words of the job description |
-| date_saved | Date you collected the job |
-| date_applied | Empty — fill this in yourself in Excel |
-| deadline | Application deadline if listed |
-| url | External application link (if not Easy Apply) |
-| linkedin_link | Direct link back to the job on LinkedIn |
-| notes | Empty — add your own notes in Excel |
-
----
-
-## Tips
-
-- **Keep the popup open** while browsing for auto-save to work
-- **Don't delete the extension folder** from your computer — Chrome needs it
-- If the extension stops working after a Chrome update, go to `chrome://extensions` and click the refresh icon on the extension
-- Your job data is stored in Chrome and will persist until you clear it, even if you close the browser
-
----
+- **No network requests.** The extension makes zero external HTTP calls. All data is stored locally in Chrome's `storage.local` API and exported to files on your machine.
+- **No analytics or telemetry.** No usage data, identifiers, or browsing activity is collected or transmitted.
+- **Minimal permissions.** The extension only requests `storage` and access to `linkedin.com/jobs` pages.
+- **No personal data.** Only publicly visible job posting information is captured. No user profiles, credentials, or session data are accessed.
 
 ## Troubleshooting
 
 **"No file connected" after reopening the popup**
-This is normal. Click "Upload Sheet" and select your file to reconnect.
+Click **Upload Sheet** and select your file to reconnect. The browser cannot persist file handles across sessions.
 
 **Jobs aren't being collected**
 Make sure you're on a LinkedIn jobs page (`linkedin.com/jobs/...`) and clicking on individual job listings.
 
-**"Auto-save failed — file may be open"**
-Close the Excel file, then collect another job. Auto-save will retry automatically.
+**"Auto-save failed -- file may be open"**
+Close the file in Excel, then collect another job. Auto-save retries automatically on the next change.
 
 **Extension disappeared from toolbar**
-Go to `chrome://extensions`, make sure it's still enabled, then re-pin it using the puzzle piece icon.
+Go to `chrome://extensions`, make sure it's enabled, then re-pin it.
+
+## License
+
+MIT

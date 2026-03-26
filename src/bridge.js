@@ -47,21 +47,11 @@
     return '';
   }
 
-  function getRecruiterName(appDetail) {
-    const members = Array.isArray(appDetail?.hiringTeamMembers) ? appDetail.hiringTeamMembers : [];
-    for (const member of members) {
-      const name = member?.name || member?.memberName || '';
-      if (name) return name;
-    }
-    return '';
-  }
-
   function extractJob(jobId) {
     const cache = getStoreCache();
     if (!cache) return null;
 
     const jobUrn = `urn:li:fsd_jobPosting:${jobId}`;
-    const appDetailUrn = `urn:li:fsd_jobSeekerApplicationDetail:${jobId}`;
     const descriptionUrn = `urn:li:fsd_jobDescription:${jobId}`;
 
     const jobData = getCacheRecord(cache, jobUrn);
@@ -82,7 +72,6 @@
 
     const locationData = getCacheRecord(cache, jobData['*location']);
     const employmentStatus = getCacheRecord(cache, jobData['*employmentStatus']);
-    const appDetail = getCacheRecord(cache, appDetailUrn);
     const descriptionData = getCacheRecord(cache, descriptionUrn);
 
     const descriptionText = jobData.description?.text
@@ -93,7 +82,7 @@
       linkedin_job_id: String(jobId),
       title: jobData.title || '',
       company: companyName,
-      external_url: jobData.companyApplyUrl || appDetail?.companyApplyUrl || '',
+      external_url: jobData.companyApplyUrl || '',
       linkedin_link: `https://www.linkedin.com/jobs/view/${jobId}/`,
       location: locationData?.defaultLocalizedName || locationData?.defaultLocalizedNameWithoutCountryName || locationData?.abbreviatedLocalizedName || '',
       remote: getRemoteText(jobData, cache) || 'not found',
@@ -101,8 +90,6 @@
       salary_range: '',
       description_text: descriptionText,
       deadline: jobData.expireAt || jobData.closedAt || '',
-      recruiter_name: getRecruiterName(appDetail),
-      recruiter_email: '',
     };
   }
 

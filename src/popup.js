@@ -140,7 +140,7 @@
       const { jobs, errors } = window.LinkedInCollectorImport.parseWorkbook(arrayBuffer);
 
       if (errors.length > 0) {
-        console.warn('[LinkedIn Collector] Import warnings:', errors);
+        console.warn('[LinkedIn Job Scraper] Import warnings:', errors);
       }
 
       if (jobs.length === 0 && errors.length > 0) {

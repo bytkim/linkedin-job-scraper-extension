@@ -72,8 +72,6 @@
       salary_range: textContent('.job-details-jobs-unified-top-card__salary-info', panel),
       description_text: textContent('#job-details', panel),
       deadline: '',
-      recruiter_name: '',
-      recruiter_email: '',
     };
   }
 
@@ -90,8 +88,6 @@
       salary_range: primary?.salary_range || fallback.salary_range,
       description_text: primary?.description_text || fallback.description_text,
       deadline: primary?.deadline || fallback.deadline,
-      recruiter_name: primary?.recruiter_name || fallback.recruiter_name,
-      recruiter_email: '',
     };
   }
 

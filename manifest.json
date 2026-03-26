@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "LinkedIn Job Collector Standalone",
+  "name": "LinkedIn Job Scraper Extension",
   "version": "1.0.0",
   "description": "Collect LinkedIn jobs locally and export them to XLSX.",
   "permissions": ["storage", "unlimitedStorage"],
